@@ -1,1 +1,5 @@
 /* Enter your custom styles here */
+
+.removeLine > div > div {
+  border-bottom: #f0f0f0;
+}

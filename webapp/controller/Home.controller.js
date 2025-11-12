@@ -5,6 +5,10 @@ sap.ui.define([
 
     return Controller.extend("cucedolino.controller.Home", {
         onInit() {
+            //set min and max date 
+            let datePicker = this.getView().byId("datePicker")
+            datePicker.setMaxDate(new Date())
+            datePicker.setMinDate(new Date("2015-01-01"))
             this.initModel()
         },
         initModel() {

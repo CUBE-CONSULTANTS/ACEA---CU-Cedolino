@@ -22,7 +22,7 @@
                             </layoutData>
                         </Image>
 
-                        <VBox alignContent="Stretch" justifyContent="End" height="100%">
+                        <VBox alignContent="Stretch" justifyContent="End" height="100%" class="removeLine">
                             <layoutData>
                                 <l:SplitterLayoutData size="70%" />
                             </layoutData>
@@ -40,13 +40,14 @@
                                     </fb:FilterGroupItem>
                                     <fb:FilterGroupItem name="Anno" label="Anno" groupName="Group1" visibleInFilterBar="true">
                                         <fb:control>
-                                            <DatePicker value="{
-                                        'path': 'modello>/anno',
-                                        'type': 'sap.ui.model.type.Date',
-                                        'formatOptions': {
-                                            'pattern': 'yyyy'
-                                        } 
-                                    }" class="sapUiSmallMarginBottom"/>
+                                            <DatePicker id="datePicker" value="{
+                                                'path': 'modello>/anno',
+                                                'type': 'sap.ui.model.type.Date',
+                                                'formatOptions': {
+                                                    'pattern': 'yyyy'
+                                                } 
+                                            }" 
+                                            class="sapUiSmallMarginBottom"/>
                                         </fb:control>
                                     </fb:FilterGroupItem>
                                 </fb:filterGroupItems>
@@ -58,7 +59,7 @@
 
 
                 <Panel width="100%" height="450px" class="sapUiMediumMarginTop" visible="{modello>/tableVisible}">
-                    <ui:Table id="tableUI"  rows="{modello>/rowTable}" selectionMode="Single" rowMode="Auto" ariaLabelledBy="title" rowSelectionChange=".onSelectionChange">
+                    <ui:Table id="tableUI" rows="{modello>/rowTable}" selectionMode="Single" rowMode="Auto" ariaLabelledBy="title" rowSelectionChange=".onSelectionChange">
                         <ui:noData>
                             <IllustratedMessage title="No Data" description="Non sono presenti dati per i filtri applicati" illustrationType="sapIllus-NoData" enableVerticalResponsiveness="true">
                             </IllustratedMessage>
