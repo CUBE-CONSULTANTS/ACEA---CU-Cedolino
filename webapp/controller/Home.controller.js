@@ -1,19 +1,42 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "../model/formatter",
+    "./BaseController"
+], (Controller, formatter, BaseController) => {
     "use strict";
 
-    return Controller.extend("cucedolino.controller.Home", {
+    return BaseController.extend("cucedolino.controller.Home", {
+        formatter: formatter,
         onInit() {
+            this.getOwnerComponent()
+                .getRouter()
+                .getRoute("RouteFirstPage")
+                .attachPatternMatched(this._onRouteMatched, this);
+
+            this.getOwnerComponent()
+                .getRouter()
+                .getRoute("RouteHome")
+                .attachPatternMatched(this._onRouteMatched, this);
+        },
+        _onRouteMatched: function (oEvent) {
+            this.initModel()
             //set min and max date 
             let datePicker = this.getView().byId("datePicker")
             datePicker.setMaxDate(new Date())
             datePicker.setMinDate(new Date("2015-01-01"))
-            this.initModel()
+            //set logo
+            let { Logo } = oEvent.getParameter("arguments")
+            if (Logo) this.getView().getModel("modello").setProperty("/pathLogo", Logo)
+            debugger
         },
         initModel() {
-            this.getView().setModel(new sap.ui.model.json.JSONModel({ anno: new Date(), tipoDocumento: "CU", tableVisible: false, enableButton: false }), "modello")
-
+            this.getView().setModel(new sap.ui.model.json.JSONModel({
+                anno: new Date(),
+                tipoDocumento: "CU",
+                tableVisible: false,
+                enableButton: false,
+                pathLogo: this.getUrlParams()
+            }), "modello")
         },
         onSearch: function (oEvent) {
             this.getView().setBusy(true)
@@ -51,7 +74,7 @@ sap.ui.define([
             sap.ui.core.BusyIndicator.show(0);
             try {
                 let link = document.createElement('a');
-                link.href = "./attachments/FileEsempi.pdf"; // percorso relativo al file nella tua webapp
+                link.href = "./attachments/FileEsempi.pdf";
                 link.download = FileNameSelected;
                 document.body.appendChild(link);
                 link.click();
@@ -60,7 +83,6 @@ sap.ui.define([
             } catch (err) {
                 console.log(err)
             }
-
             sap.ui.core.BusyIndicator.hide(0);
 
         },

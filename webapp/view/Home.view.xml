@@ -13,10 +13,7 @@
             <FlexBox direction="Column" alignContent="SpaceBetween" alignItems="Inherit">
                 <Panel width="100%" height="auto">
                     <l:Splitter>
-                        <Image src="{
-                                value: 'cucedolino/public/Logo_Acqua_A_grande.png',
-                                formatter: 'sap.ui.require.toUrl'
-                            }" width="70%" class="sapUiTinyMarginStart">
+                        <Image id="ImageLogo" src="{path: 'modello>/pathLogo', formatter: '.formatter.formatLogoPath'}" width="70%" class="sapUiTinyMarginStart">
                             <layoutData>
                                 <l:SplitterLayoutData size="30%" resizable="false" />
                             </layoutData>
@@ -46,8 +43,7 @@
                                                 'formatOptions': {
                                                     'pattern': 'yyyy'
                                                 } 
-                                            }" 
-                                            class="sapUiSmallMarginBottom"/>
+                                            }" class="sapUiSmallMarginBottom"/>
                                         </fb:control>
                                     </fb:FilterGroupItem>
                                 </fb:filterGroupItems>
