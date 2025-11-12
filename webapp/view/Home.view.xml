@@ -1,0 +1,141 @@
+<mvc:View controllerName="cucedolino.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:ui="sap.ui.table">
+    <f:DynamicPage headerExpanded="true" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <FlexBox direction="Row" alignItems="Center" justifyContent="Center" class="">
+                        <Avatar displayShape="Square" src="{
+                        value: 'cucedolino/public/aceaEnergia.png',
+                        formatter: 'sap.ui.require.toUrl'
+                        }" displaySize="L" showBorder="false" press="onPress" class="sapUiTinyMarginEnd"/>
+                        <Title text="{=${modello>/titleTable} ? ${modello>/titleTable} + ' Online' : 'ACEA'}"/>
+                    </FlexBox>
+                </f:heading>
+
+                <f:actions>
+                    <Avatar displayShape="Square" src="{
+                        value: 'cucedolino/public/aceaEnergia.png',
+                        formatter: 'sap.ui.require.toUrl'
+                        }" displaySize="L" showBorder="false" press="onPress" class="sapUiMediumMarginTop"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <f:content>
+                    <fb:FilterBar useToolbar="false" search=".onSearch" clear=".onClear" advancedMode="false" showFilterConfiguration="false" showClearOnFB="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="Documento" label="Tipo documento" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <SegmentedButton selectedKey="{modello>/tipoDocumento}" class="sapUiSmallMarginBottom">
+                                        <items>
+                                            <SegmentedButtonItem text="CU" key="CU" />
+                                            <SegmentedButtonItem text="Cedolino" key="Cedolino" />
+                                        </items>
+                                    </SegmentedButton>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Anno" label="Anno" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker value="{
+                                        'path': 'modello>/anno',
+                                        'type': 'sap.ui.model.type.Date',
+                                        'formatOptions': {
+                                            'pattern': 'yyyy'
+                                        } 
+                                    }" class="sapUiSmallMarginBottom"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <Table id="table" selectionChange=".onSelectionChange" inset="false" items="{modello>/rowTable}" mode="SingleSelectLeft" visible="{modello>/tableVisible}">
+                <headerToolbar>
+                    <OverflowToolbar >
+                        <Title text="Lista {modello>/titleTable}"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column demandPopin="true">
+                        <Text text="Esercizio"/>
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Mese"/>
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Società"/>
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Filename"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{modello>esercizio}" />
+                            <Text text="{modello>mese}" />
+                            <Text text="{modello>soc}" />
+                            <Text text="{modello>filename}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table> -->
+            <ui:Table id="tableUI" visible="{modello>/tableVisible}" rows="{modello>/rowTable}" selectionMode="Single" rowMode="Auto" ariaLabelledBy="title" rowSelectionChange=".onSelectionChange">
+                <ui:noData>
+                    <IllustratedMessage title="No Data" description="Non sono presenti dati per i filtri applicati" illustrationType="sapIllus-NoData" enableVerticalResponsiveness="true">
+                    </IllustratedMessage>
+                </ui:noData>
+                <ui:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title text="Lista {modello>/titleTable}"/>
+                    </OverflowToolbar>
+                </ui:extension>
+                <ui:columns>
+                    <ui:Column width="20rem">
+                        <Label text="Esercizio" />
+                        <ui:template>
+                            <Text text="{modello>esercizio}" wrapping="false" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column width="auto">
+                        <Label text="Mese" />
+                        <ui:template>
+                            <Text text="{modello>mese}"/>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column width="auto">
+                        <Label text="Società" />
+                        <ui:template>
+                            <Label text="{modello>soc}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column width="auto">
+                        <Label text="Filename" />
+                        <ui:template>
+                            <Label text="{modello>filename}" />
+                        </ui:template>
+                    </ui:Column>
+
+                </ui:columns>
+            </ui:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Apri" icon="sap-icon://pdf-reader" type="Default" press=".onShowFile" enabled="{modello>/enableButton}"/>
+                <Button text="Scarica" icon="sap-icon://download" type="Emphasized" press=".onDownloadFile" enabled="{modello>/enableButton}"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
