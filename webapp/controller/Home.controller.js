@@ -27,7 +27,6 @@ sap.ui.define([
             //set logo
             let { Logo } = oEvent.getParameter("arguments")
             if (Logo) this.getView().getModel("modello").setProperty("/pathLogo", Logo)
-            debugger
         },
         initModel() {
             this.getView().setModel(new sap.ui.model.json.JSONModel({
