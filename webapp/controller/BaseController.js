@@ -12,7 +12,7 @@ sap.ui.define([
                 if (url.includes("/Acea")) {
                     return url.split("/Acea")?.[1] || "LOGO_ATOH.png"
                 }
-                return "LOGO_ATOH.png"
+                return "LOGO_ATOH.png" //Immagine di default
             }
         })
     })
