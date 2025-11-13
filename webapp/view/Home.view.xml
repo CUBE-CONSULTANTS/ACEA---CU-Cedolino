@@ -13,7 +13,7 @@
             <FlexBox direction="Column" alignContent="SpaceBetween" alignItems="Inherit">
                 <Panel width="100%" height="auto">
                     <l:Splitter>
-                        <Image id="ImageLogo" src="{path: 'modello>/pathLogo', formatter: '.formatter.formatLogoPath'}" width="70%" class="sapUiTinyMarginStart">
+                        <Image src="{path: 'modello>/pathLogo', formatter: '.formatter.formatLogoPath'}" width="70%" class="sapUiTinyMarginStart">
                             <layoutData>
                                 <l:SplitterLayoutData size="30%" resizable="false" />
                             </layoutData>
