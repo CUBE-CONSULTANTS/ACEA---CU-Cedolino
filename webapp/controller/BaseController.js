@@ -10,9 +10,9 @@ sap.ui.define([
             getUrlParams: function (windowhref) {
                 const url = window.location.href
                 if (url.includes("/Acea")) {
-                    return url.split("/Acea")?.[1] || "LOGO_ATOH.png"
+                    return url.split("/Acea")?.[1] || "LOGO_ATOH.PNG"
                 }
-                return "LOGO_ATOH.png" //Immagine di default
+                return "LOGO_ATOH.PNG" //Immagine di default
             }
         })
     })
