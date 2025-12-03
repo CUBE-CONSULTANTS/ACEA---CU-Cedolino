@@ -66,11 +66,12 @@ sap.ui.define([
         },
         onDownloadFile: function (oEvent) {
             let FileNameSelected
+            debugger
             if (this.byId("table")) {
                 let { filename } = this.byId("table").getSelectedItem().getBindingContext("modello").getObject()
                 FileNameSelected = filename
             } else {
-                let { filename } = this.byId("tableUI").getRows()[this.byId("tableUI").getSelectedIndex()].getBindingContext("modello").getObject()
+                let { filename } = this.byId("tableUI").getSelectedItem().getBindingContext("modello").getObject()
                 FileNameSelected = filename
             }
             sap.ui.core.BusyIndicator.show(0);
