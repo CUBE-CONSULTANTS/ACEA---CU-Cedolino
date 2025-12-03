@@ -203,14 +203,11 @@ sap.ui.define([
             }
         },
         onSelectionChange: function (oEvent) {
-            if (!oEvent.getSource().sId.includes("tableUI")) {
-                if (oEvent.getSource().getSelectedItem()) {
-                    this.getView().getModel("modello").setProperty("/enableButton", true)
-                }
-            } else if (Math.sign(oEvent.getSource().getSelectedIndex()) == -1) {
-                this.getView().getModel("modello").setProperty("/enableButton", false)
-            } else {
+            if (oEvent.getSource().getSelectedItems().length != 0) {
                 this.getView().getModel("modello").setProperty("/enableButton", true)
+
+            } else {
+                this.getView().getModel("modello").setProperty("/enableButton", false)
 
             }
         }
