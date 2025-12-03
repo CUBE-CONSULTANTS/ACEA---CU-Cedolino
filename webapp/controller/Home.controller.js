@@ -46,6 +46,9 @@ sap.ui.define([
             }, 50)
         },
         onShowFile: function () {
+            if (!this.getOwnerComponent().getModel("device").getProperty("/system/desktop")) {
+                return this.onDownloadFile()
+            }
             if (!this._showPDF) {
                 new sap.ui.core.Fragment.load({
                     id: this.getView().getId(),

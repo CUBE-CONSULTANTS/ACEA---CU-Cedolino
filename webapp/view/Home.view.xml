@@ -6,44 +6,56 @@
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
     xmlns:ui="sap.ui.table">
-    <Page showHeader="false" class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
+    <Page showHeader="false"
+        class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
 
 
         <content>
             <FlexBox direction="Column" alignContent="SpaceBetween" alignItems="Inherit">
                 <Panel width="100%" height="auto">
                     <l:Splitter>
-                        <Image src="{path: 'modello>/pathLogo', formatter: '.formatter.formatLogoPath'}" width="70%" class="sapUiTinyMarginStart">
+                        <Image
+                            src="{path: 'modello>/pathLogo', formatter: '.formatter.formatLogoPath'}"
+                            width="70%" class="sapUiTinyMarginStart">
                             <layoutData>
                                 <l:SplitterLayoutData size="30%" resizable="false" />
                             </layoutData>
                         </Image>
 
-                        <VBox alignContent="Stretch" justifyContent="End" height="100%" class="removeLine">
+                        <VBox alignContent="Stretch" justifyContent="End" height="100%"
+                            class="removeLine">
                             <layoutData>
                                 <l:SplitterLayoutData size="70%" />
                             </layoutData>
-                            <fb:FilterBar useToolbar="false" search=".onSearch" showAllFilters="true" clear=".onClear" advancedMode="false" showFilterConfiguration="false" showClearOnFB="true">
+                            <fb:FilterBar useToolbar="false" search=".onSearch"
+                                showAllFilters="true" clear=".onClear" advancedMode="false"
+                                showFilterConfiguration="false" showClearOnFB="true">
                                 <fb:filterGroupItems>
-                                    <fb:FilterGroupItem name="Documento" label="Tipo documento" groupName="Group1" visibleInFilterBar="true">
+                                    <fb:FilterGroupItem name="Documento" label="Tipo documento"
+                                        groupName="Group1" visibleInFilterBar="true">
                                         <fb:control>
-                                            <SegmentedButton selectedKey="{modello>/tipoDocumento}" class="sapUiSmallMarginBottom">
+                                            <SegmentedButton selectedKey="{modello>/tipoDocumento}"
+                                                class="sapUiSmallMarginBottom">
                                                 <items>
                                                     <SegmentedButtonItem text="CU" key="CU" />
-                                                    <SegmentedButtonItem text="Cedolino" key="Cedolino" />
+                                                    <SegmentedButtonItem text="Cedolino"
+                                                        key="Cedolino" />
                                                 </items>
                                             </SegmentedButton>
                                         </fb:control>
                                     </fb:FilterGroupItem>
-                                    <fb:FilterGroupItem name="Anno" label="Anno" groupName="Group1" visibleInFilterBar="true">
+                                    <fb:FilterGroupItem name="Anno" label="Anno" groupName="Group1"
+                                        visibleInFilterBar="true">
                                         <fb:control>
-                                            <DatePicker id="datePicker" value="{
+                                            <DatePicker id="datePicker"
+                                                value="{
                                                 'path': 'modello>/anno',
                                                 'type': 'sap.ui.model.type.Date',
                                                 'formatOptions': {
                                                     'pattern': 'yyyy'
                                                 } 
-                                            }" class="sapUiSmallMarginBottom"/>
+                                            }"
+                                                class="sapUiSmallMarginBottom" />
                                         </fb:control>
                                     </fb:FilterGroupItem>
                                 </fb:filterGroupItems>
@@ -54,54 +66,54 @@
                 </Panel>
 
 
-                <Panel width="100%" height="450px" class="sapUiMediumMarginTop" visible="{modello>/tableVisible}">
-                    <ui:Table id="tableUI" rows="{modello>/rowTable}" selectionMode="Single" rowMode="Auto" ariaLabelledBy="title" rowSelectionChange=".onSelectionChange">
-                        <ui:noData>
-                            <IllustratedMessage title="No Data" description="Non sono presenti dati per i filtri applicati" illustrationType="sapIllus-NoData" enableVerticalResponsiveness="true">
-                            </IllustratedMessage>
-                        </ui:noData>
-                        <ui:extension>
-                            <OverflowToolbar style="Clear">
-                                <Title text="Lista {modello>/titleTable}"/>
-                            </OverflowToolbar>
-                        </ui:extension>
-                        <ui:columns>
-                            <ui:Column width="20rem">
-                                <Label text="Esercizio" />
-                                <ui:template>
+                <Panel width="100%" height="450px" class="sapUiMediumMarginTop"
+                    visible="{modello>/tableVisible}">
+                    <Table id="tableUI" items="{modello>/rowTable}"
+                        selectionChange="onSelectionChange"
+                        mode="SingleSelectLeft">
+                        <columns>
+                            <Column
+                                width="12em">
+                                <Text text="Esercizio" />
+                            </Column>
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Mese" />
+                            </Column>
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Società" />
+                            </Column>
+                            <Column
+                                minScreenWidth="Desktop"
+                                demandPopin="true">
+                                <Text text="Filename" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle">
+                                <cells>
                                     <Text text="{modello>esercizio}" wrapping="false" />
-                                </ui:template>
-                            </ui:Column>
-                            <ui:Column width="auto">
-                                <Label text="Mese" />
-                                <ui:template>
-                                    <Text text="{modello>mese}"/>
-                                </ui:template>
-                            </ui:Column>
-                            <ui:Column width="auto">
-                                <Label text="Società" />
-                                <ui:template>
+                                    <Text text="{modello>mese}" />
                                     <Label text="{modello>soc}" />
-                                </ui:template>
-                            </ui:Column>
-                            <ui:Column width="auto">
-                                <Label text="Filename" />
-                                <ui:template>
                                     <Label text="{modello>filename}" />
-                                </ui:template>
-                            </ui:Column>
-
-                        </ui:columns>
-                    </ui:Table>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
                 </Panel>
             </FlexBox>
         </content>
 
         <footer>
             <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button text="Apri" icon="sap-icon://pdf-reader" type="Default" press=".onShowFile" enabled="{modello>/enableButton}"/>
-                <Button text="Scarica" icon="sap-icon://download" type="Emphasized" press=".onDownloadFile" enabled="{modello>/enableButton}"/>
+                <ToolbarSpacer />
+                <Button text="Apri" icon="sap-icon://pdf-reader" type="Default" press=".onShowFile"
+                    enabled="{modello>/enableButton}" />
+                <Button text="Scarica" icon="sap-icon://download" type="Emphasized"
+                    press=".onDownloadFile" enabled="{modello>/enableButton}" />
             </OverflowToolbar>
         </footer>
     </Page>
